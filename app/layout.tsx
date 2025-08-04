@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-sync-scripts */
 import type { Metadata } from "next";
-import { Jost } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -8,8 +8,8 @@ import Navbar from "@/components/home-page/Navbar";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/home-page/AppSidebar";
 
-const jostSans = Jost({
-  variable: "--font-jost-sans",
+const interSans = Inter({
+  variable: "--font-inter-sans",
   subsets: ["latin"]
 })
 
@@ -31,13 +31,13 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
         <body
-          className={`${jostSans.className} antialiased relative`}
+          className={`${interSans.className} antialiased relative`}
         >
           <script src="https://js.puter.com/v2/"></script>
           <SidebarProvider>
             <ThemeProvider
               attribute="class"
-              defaultTheme="system"
+              defaultTheme="dark"
               enableSystem
             >
               <AppSidebar />
