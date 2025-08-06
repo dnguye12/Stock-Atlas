@@ -1,0 +1,16 @@
+{
+    "Home": {
+        "Hero": {
+            "title": "Power your investments with",
+            "desc": "We provide 100% free and easy-to-understand data to investors. Harness advanced algorithms and AI to unlock detailed insights on any stock.",
+            "feature-1-title": "Advanced Analytics",
+            "feature-1-desc": "Data-driven insights with interactive dashboards.",
+            "feature-2-title": "Comprehensive Stock Coverage",
+            "feature-2-desc": "Accurate information on a large amount of stocks and funds.",
+            "feature-3-title": "AI-Powered Forecasting",
+            "feature-3-desc": "Intelligent price predictions and trend modeling powered by machine learning.",
+            "feature-4-title": "News & Research",
+            "feature-4-desc": "News aggregation, expert analyses, and analyst reports in one place."
+        }
+    }
+}

@@ -46,7 +46,7 @@ export default async function RootLayout({
           <SidebarProvider>
             <ThemeProvider
               attribute="class"
-              defaultTheme="dark"
+              defaultTheme="system"
               enableSystem
             >
               <AppSidebar />
