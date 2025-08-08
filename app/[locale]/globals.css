@@ -136,13 +136,29 @@
 }
 
 .highlight-block {
-    @apply rounded-lg border p-4 shadow bg-sidebar;
+  @apply rounded-lg border p-4 pb-0 bg-sidebar;
 }
 
 .highlight-header {
-    @apply flex justify-between items-center w-full mb-4 text-foreground;
+  @apply flex justify-between items-center w-full mb-1 text-foreground;
 }
 
 .highlight-header h3 {
-    @apply text-base md:text-lg font-semibold;
+  @apply text-base md:text-lg font-semibold;
+}
+
+.highlight-block tbody td.symbol {
+  @apply text-sm font-semibold text-blue-600 dark:text-blue-500
+}
+
+.highlight-block tbody td.name {
+  @apply font-semibold
+}
+
+.highlight-block tbody td .price {
+  @apply font-bold mb-0.5
+}
+
+.highlight-block tbody td .change {
+  @apply text-sm font-semibold
 }

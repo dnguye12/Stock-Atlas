@@ -1,15 +1,15 @@
 "use client"
 
-import { useEffect, useState } from "react";
 import axios from "axios"
+import { useState, useEffect } from "react"
 import { currToSymbol, formatMarketCap } from "@/utils/moneyUtils";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { ChevronUpIcon, CrownIcon } from "lucide-react";
+import { BombIcon, ChevronDownIcon } from "lucide-react";
 import { truncateText } from "@/utils/textUtils";
 
-const DailyGainers = () => {
+const DailyLosers = () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const [gainers, setGainers] = useState<any>(null)
+    const [losers, setLosers] = useState<any>(null)
 
     const [isLoading, setIsLoading] = useState(true)
 
@@ -17,11 +17,11 @@ const DailyGainers = () => {
         if (isLoading) {
             const fetchGainers = async () => {
                 try {
-                    const result = await axios.get("/api/daily/gainers")
-                    setGainers(result.data)
+                    const result = await axios.get("/api/daily/losers")
+                    setLosers(result.data)
                 } catch (error) {
                     console.log(error)
-                    setGainers(null)
+                    setLosers(null)
                 } finally {
                     setIsLoading(false)
                 }
@@ -39,8 +39,8 @@ const DailyGainers = () => {
         <div className="highlight-block">
             <div className="highlight-header">
                 <h3 className="inline-flex gap-x-2 items-center">
-                    <CrownIcon className=" !stroke-2" />
-                    <span>Top <span className=" font-bold text-up">Gainers</span> Today</span>
+                    <BombIcon className=" !stroke-2" />
+                    <span>Top <span className=" font-bold text-down">Losers</span> Today</span>
                 </h3>
             </div>
 
@@ -56,7 +56,7 @@ const DailyGainers = () => {
                 <TableBody>
                     {
                         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                        gainers.quotes.map((quote: any, idx: number) => (
+                        losers.quotes.map((quote: any, idx: number) => (
                             <TableRow key={`daily-gainer-${idx}`}>
                                 <TableCell className="symbol">{quote.symbol}</TableCell>
                                 <TableCell className="name">
@@ -67,8 +67,8 @@ const DailyGainers = () => {
                                 <TableCell>{formatMarketCap(quote.marketCap, quote.currency)}</TableCell>
                                 <TableCell>
                                     <p className="price">{currToSymbol(quote.currency)}{quote.regularMarketPrice.toFixed(2)}</p>
-                                    <p className="inline-flex items-center text-up change">
-                                        <ChevronUpIcon className=" !stroke-2" />
+                                    <p className="inline-flex items-center text-down change">
+                                        <ChevronDownIcon className=" !stroke-2" />
                                         {quote.regularMarketChangePercent.toFixed(2)}%
                                         </p>
                                 </TableCell>
@@ -78,7 +78,7 @@ const DailyGainers = () => {
                 </TableBody>
             </Table>
         </div>
-    );
+    )
 }
-
-export default DailyGainers;
+ 
+export default DailyLosers;

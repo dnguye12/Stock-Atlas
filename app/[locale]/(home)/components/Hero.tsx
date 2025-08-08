@@ -25,14 +25,14 @@ const Hero = () => {
     const t = useTranslations("Home.Hero")
 
     return (
-        <header className="w-full h-[calc(100vh-64px)]">
-            <div className="relative overflow-hidden py-32 h-full my-auto">
+        <header className="w-full">
+            <div className="relative overflow-hidden pt-32 h-full my-auto">
                 <div className="relative z-20 container  mx-auto">
                     <div className="flex flex-col items-center gap-6 text-center">
                         <div className="rounded-xl bg-sidebar p-4 shadow backdrop-blur-sm border">
                             <img src="/icon.svg" alt="logo" className="h-16" />
                         </div>
-                        <div>
+                        <div className="container mx-auto">
                             <h1 className="mb-6 text-3xl font-bold tracking-tight text-pretty lg:text-5xl">{t("title")} <span className=" ">Dividend Insight</span></h1>
                             <p className="mx-auto max-w-3xl text-muted-foreground lg:text-xl">
                                 {t("desc")}
@@ -42,27 +42,29 @@ const Hero = () => {
                             <Button className="cursor-pointer" size={"lg"}>Get Started</Button>
                             <Button className="cursor-pointer dark:bg-sidebar" variant={"outline"} size={"lg"}>Learn more <ExternalLinkIcon /></Button>
                         </div>
-                        <div className="mt-16 grid gap-4 overflow-hidden md:grid-cols-2 lg:grid-cols-4">
-                            <HeroFeature
-                                icon={ChartAreaIcon}
-                                title={t("feature-1-title")}
-                                desc={t("feature-1-desc")}
-                            />
-                            <HeroFeature
-                                icon={ChartPieIcon}
-                                title={t("feature-2-title")}
-                                desc={t("feature-2-desc")}
-                            />
-                            <HeroFeature
-                                icon={BrainCircuitIcon}
-                                title={t("feature-3-title")}
-                                desc={t("feature-3-desc")}
-                            />
-                            <HeroFeature
-                                icon={NewspaperIcon}
-                                title={t("feature-4-title")}
-                                desc={t("feature-4-desc")}
-                            />
+                        <div className="container mx-auto px-10">
+                            <div className="mt-16 grid gap-4 overflow-hidden md:grid-cols-2 lg:grid-cols-4">
+                                <HeroFeature
+                                    icon={ChartAreaIcon}
+                                    title={t("feature-1-title")}
+                                    desc={t("feature-1-desc")}
+                                />
+                                <HeroFeature
+                                    icon={ChartPieIcon}
+                                    title={t("feature-2-title")}
+                                    desc={t("feature-2-desc")}
+                                />
+                                <HeroFeature
+                                    icon={BrainCircuitIcon}
+                                    title={t("feature-3-title")}
+                                    desc={t("feature-3-desc")}
+                                />
+                                <HeroFeature
+                                    icon={NewspaperIcon}
+                                    title={t("feature-4-title")}
+                                    desc={t("feature-4-desc")}
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
