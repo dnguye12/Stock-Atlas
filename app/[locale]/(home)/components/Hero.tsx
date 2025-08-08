@@ -27,7 +27,7 @@ const Hero = () => {
     return (
         <header className="w-full h-[calc(100vh-64px)]">
             <div className="relative overflow-hidden py-32 h-full my-auto">
-                <div className="relative z-10 container  mx-auto">
+                <div className="relative z-20 container  mx-auto">
                     <div className="flex flex-col items-center gap-6 text-center">
                         <div className="rounded-xl bg-sidebar p-4 shadow backdrop-blur-sm border">
                             <img src="/icon.svg" alt="logo" className="h-16" />
@@ -66,10 +66,11 @@ const Hero = () => {
                         </div>
                     </div>
                 </div>
-                <div className="dark:hidden absolute inset-x-0 top-0 flex h-full w-full items-center justify-center">
-                    <img src="/hero-bg.svg" className="[mask-image:radial-gradient(100%_100%_at_center,white,transparent)]" />
+                <div className="dark:hidden absolute inset-x-0 top-0 flex h-full w-full items-center justify-center z-10">
+                    <img src="/hero-bg.svg" className="[mask-image:radial-gradient(50%_50%_at_center,white,transparent)]" />
                 </div>
-                <div className="dark:block hidden absolute h-full w-full bg-[url(/hero-bg-dark.png)] bg-center bg-cover bg-no-repeat top-0 left-0 ">
+                <div className="dark:block hidden absolute h-full w-full bg-[linear-gradient(0deg,rgba(10,10,10,1)_0%,rgba(10,10,10,0)_75%)] top-0 left-0 z-10"></div>
+                <div className="dark:block hidden absolute h-full w-full bg-[url(/hero-bg-dark.png)] bg-center bg-cover bg-no-repeat top-0 left-0 z-0">
                 </div>
             </div>
         </header>

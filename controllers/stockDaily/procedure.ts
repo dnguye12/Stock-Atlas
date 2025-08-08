@@ -11,14 +11,19 @@ export const dailyStockRouter = createTRPCRouter({
             })
         )
         .query(async ({ input }) => {
-            const queryOptions = { count: input.count }
+            const queryOptions = { count: input.count, region: 'US', lang: 'en-US' }
 
             try {
                 const gainers = await yahooFinance.dailyGainers(queryOptions)
 
                 return gainers
-            } catch (error) {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            } catch (error: any) {
+                if (error instanceof yahooFinance.errors.FailedYahooValidationError) {
+                    return error.result
+                }
                 if (error instanceof Error) {
+                    console.log(error)
                     throw new TRPCError({
                         code: "BAD_REQUEST",
                         message: "Something went wrong"

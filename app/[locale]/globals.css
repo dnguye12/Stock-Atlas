@@ -134,3 +134,15 @@
 .text-down {
   color: var(--down)
 }
+
+.highlight-block {
+    @apply rounded-lg border p-4 shadow bg-sidebar;
+}
+
+.highlight-header {
+    @apply flex justify-between items-center w-full mb-4 text-foreground;
+}
+
+.highlight-header h3 {
+    @apply text-base md:text-lg font-semibold;
+}

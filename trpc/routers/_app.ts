@@ -1,5 +1,5 @@
 import { createTRPCRouter } from '../init';
-import { dailyStockRouter } from '@/controllers/stock/daily/procedure';
+import { dailyStockRouter } from '@/controllers/stockDaily/procedure';
 export const appRouter = createTRPCRouter({
     dailyStock: dailyStockRouter
 });
