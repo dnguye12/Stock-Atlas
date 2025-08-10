@@ -17,7 +17,7 @@ const DailyLosers = () => {
         if (isLoading) {
             const fetchGainers = async () => {
                 try {
-                    const result = await axios.get("/api/daily/losers")
+                    const result = await axios.get("/api/screener?scrIds=day_losers&count=5")
                     setLosers(result.data)
                 } catch (error) {
                     console.log(error)
