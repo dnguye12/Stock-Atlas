@@ -1,11 +1,12 @@
 "use client"
 
-import axios from "axios"
 import { useState, useEffect } from "react"
 import { currToSymbol, formatMarketCap } from "@/utils/moneyUtils";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { BombIcon, ChevronDownIcon } from "lucide-react";
 import { truncateText } from "@/utils/textUtils";
+import { Skeleton } from "@/components/ui/skeleton";
+import DailySkeleton from "./DailySkeleton";
 
 const DailyLosers = () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -17,8 +18,9 @@ const DailyLosers = () => {
         if (isLoading) {
             const fetchGainers = async () => {
                 try {
-                    const result = await axios.get("/api/screener?scrIds=day_losers&count=5")
-                    setLosers(result.data)
+                    const result = await fetch("/api/screener?scrIds=day_losers&count=5")
+                    const data = await result.json()
+                    setLosers(data)
                 } catch (error) {
                     console.log(error)
                     setLosers(null)
@@ -32,7 +34,9 @@ const DailyLosers = () => {
     }, [isLoading])
 
     if (isLoading) {
-        return <div>...Loading</div>
+        return (
+            <DailySkeleton Icon={BombIcon} type="daily_losers"/>
+        )
     }
 
     return (
@@ -70,7 +74,7 @@ const DailyLosers = () => {
                                     <p className="inline-flex items-center text-down change">
                                         <ChevronDownIcon className=" !stroke-2" />
                                         {quote.regularMarketChangePercent.toFixed(2)}%
-                                        </p>
+                                    </p>
                                 </TableCell>
                             </TableRow>
                         ))
@@ -80,5 +84,5 @@ const DailyLosers = () => {
         </div>
     )
 }
- 
+
 export default DailyLosers;

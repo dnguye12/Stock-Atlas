@@ -1,15 +1,15 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import { currToSymbol, formatMarketCap } from "@/utils/moneyUtils";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { ChevronUpIcon, CrownIcon } from "lucide-react";
-import { truncateText } from "@/utils/textUtils";
 import DailySkeleton from "./DailySkeleton";
+import { ArrowDownNarrowWideIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-react";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { currToSymbol, formatMarketCap } from "@/utils/moneyUtils";
+import { truncateText } from "@/utils/textUtils";
 
-const DailyGainers = () => {
+const DailyShorted = () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const [gainers, setGainers] = useState<any>(null)
+    const [shorts, setShorts] = useState<any>(null)
 
     const [isLoading, setIsLoading] = useState(true)
 
@@ -17,12 +17,12 @@ const DailyGainers = () => {
         if (isLoading) {
             const fetchGainers = async () => {
                 try {
-                    const result = await fetch("/api/screener?scrIds=day_gainers&count=5")
+                    const result = await fetch("/api/screener?scrIds=most_actives&count=5")
                     const data = await result.json()
-                    setGainers(data)
+                    setShorts(data)
                 } catch (error) {
                     console.log(error)
-                    setGainers(null)
+                    setShorts(null)
                 } finally {
                     setIsLoading(false)
                 }
@@ -33,15 +33,17 @@ const DailyGainers = () => {
     }, [isLoading])
 
     if (isLoading) {
-        return (<DailySkeleton Icon={CrownIcon} type="daily_gainers" />)
+        return (
+            <DailySkeleton Icon={ArrowDownNarrowWideIcon} type="daily_shorted" />
+        )
     }
-
-    return (
+    
+    return ( 
         <div className="highlight-block">
             <div className="highlight-header">
                 <h3 className="inline-flex gap-x-2 items-center">
-                    <CrownIcon className=" !stroke-2" />
-                    <span>Top <span className=" font-bold text-up">Gainers</span> Today</span>
+                    <ArrowDownNarrowWideIcon className=" !stroke-2" />
+                    <span>Most <span className=" font-bol">Shorted</span> Today</span>
                 </h3>
             </div>
 
@@ -57,7 +59,7 @@ const DailyGainers = () => {
                 <TableBody>
                     {
                         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                        gainers.quotes.map((quote: any, idx: number) => (
+                        shorts.quotes.map((quote: any, idx: number) => (
                             <TableRow key={`daily-gainer-${idx}`}>
                                 <TableCell className="symbol">{quote.symbol}</TableCell>
                                 <TableCell className="name">
@@ -68,10 +70,24 @@ const DailyGainers = () => {
                                 <TableCell>{formatMarketCap(quote.marketCap, quote.currency)}</TableCell>
                                 <TableCell>
                                     <p className="price">{currToSymbol(quote.currency)}{quote.regularMarketPrice.toFixed(2)}</p>
-                                    <p className="inline-flex items-center text-up change">
-                                        <ChevronUpIcon className=" !stroke-2" />
-                                        {quote.regularMarketChangePercent.toFixed(2)}%
-                                        </p>
+                                    {
+                                        quote.regularMarketChangePercent < 0
+                                            ?
+                                            (
+                                                <p className="inline-flex items-center text-down change">
+                                                    <ChevronDownIcon className=" !stroke-2" />
+                                                    {Math.abs(quote.regularMarketChangePercent.toFixed(2))}%
+                                                </p>
+                                            )
+                                            :
+                                            (
+                                                <p className="inline-flex items-center text-up change">
+                                                    <ChevronUpIcon className=" !stroke-2" />
+                                                    {quote.regularMarketChangePercent.toFixed(2)}%
+                                                </p>
+                                            )
+                                    }
+
                                 </TableCell>
                             </TableRow>
                         ))
@@ -79,7 +95,7 @@ const DailyGainers = () => {
                 </TableBody>
             </Table>
         </div>
-    );
+     );
 }
-
-export default DailyGainers;
+ 
+export default DailyShorted;
