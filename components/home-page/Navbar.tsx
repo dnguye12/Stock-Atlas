@@ -18,8 +18,8 @@ const Navbar = () => {
     const { setTheme } = useTheme()
 
     return (
-        <div className="relative bg-sidebar px-5 h-16 border-b shadow">
-            <div className="container mx-auto flex justify-between items-center h-full">
+        <div className="relative bg-sidebar h-16 border-b shadow">
+            <div className="container mx-auto flex justify-between items-center h-full px-10">
                 <div className="flex items-center gap-x-4">
                     <SidebarTrigger />
                     <Link href="#">

@@ -3,6 +3,7 @@ import DailyGainers from "./(home)/components/DailyGainers";
 import DailyLosers from "./(home)/components/DailyLosers";
 import DailyActive from "./(home)/components/DailyActive";
 import DailyShorted from "./(home)/components/DailyShorted";
+import Footer from "./(home)/components/Footer";
 
 export default function Home() {
 
@@ -10,13 +11,13 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <div className="container mx-auto grid grid-cols-2 gap-4 mt-4 px-10">
+      <div className="container mx-auto grid grid-cols-2 gap-4 mt-4 mb-16 px-10">
         <DailyGainers />
         <DailyLosers />
         <DailyActive />
         <DailyShorted />
       </div>
-
+      <Footer />
     </>
 
 
