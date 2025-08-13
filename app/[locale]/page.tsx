@@ -3,7 +3,6 @@ import DailyGainers from "./(home)/components/DailyGainers";
 import DailyLosers from "./(home)/components/DailyLosers";
 import DailyActive from "./(home)/components/DailyActive";
 import DailyShorted from "./(home)/components/DailyShorted";
-import Footer from "./(home)/components/Footer";
 
 export default function Home() {
 
@@ -17,7 +16,6 @@ export default function Home() {
         <DailyActive />
         <DailyShorted />
       </div>
-      <Footer />
     </>
 
 

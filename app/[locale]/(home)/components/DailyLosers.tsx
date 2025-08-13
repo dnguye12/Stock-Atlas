@@ -5,14 +5,14 @@ import { currToSymbol, formatMarketCap } from "@/utils/moneyUtils";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { BombIcon, ChevronDownIcon } from "lucide-react";
 import { truncateText } from "@/utils/textUtils";
-import { Skeleton } from "@/components/ui/skeleton";
 import DailySkeleton from "./DailySkeleton";
+import { useRouter } from "next/navigation";
 
 const DailyLosers = () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [losers, setLosers] = useState<any>(null)
-
     const [isLoading, setIsLoading] = useState(true)
+    const router = useRouter()
 
     useEffect(() => {
         if (isLoading) {
@@ -35,8 +35,12 @@ const DailyLosers = () => {
 
     if (isLoading) {
         return (
-            <DailySkeleton Icon={BombIcon} type="daily_losers"/>
+            <DailySkeleton Icon={BombIcon} type="daily_losers" />
         )
+    }
+
+    const handleClick = (symbol: string) => {
+        router.push(`/stock/${symbol}`)
     }
 
     return (
@@ -61,7 +65,7 @@ const DailyLosers = () => {
                     {
                         // eslint-disable-next-line @typescript-eslint/no-explicit-any
                         losers.quotes.map((quote: any, idx: number) => (
-                            <TableRow key={`daily-gainer-${idx}`}>
+                            <TableRow onClick={() => handleClick(quote.symbol)} key={`daily-gainer-${idx}`} className="cursor-pointer">
                                 <TableCell className="symbol">{quote.symbol}</TableCell>
                                 <TableCell className="name">
                                     <span className=" truncate">

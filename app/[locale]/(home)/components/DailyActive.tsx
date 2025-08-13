@@ -6,12 +6,13 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { ChartLineIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-react";
 import { truncateText } from "@/utils/textUtils";
 import DailySkeleton from "./DailySkeleton";
+import { useRouter } from "next/navigation";
 
 const DailyActive = () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [actives, setActives] = useState<any>(null)
-
     const [isLoading, setIsLoading] = useState(true)
+    const router = useRouter()
 
     useEffect(() => {
         if (isLoading) {
@@ -38,6 +39,10 @@ const DailyActive = () => {
         )
     }
 
+    const handleClick = (symbol: string) => {
+        router.push(`/stock/${symbol}`)
+    }
+
     return (
         <div className="highlight-block">
             <div className="highlight-header">
@@ -60,7 +65,7 @@ const DailyActive = () => {
                     {
                         // eslint-disable-next-line @typescript-eslint/no-explicit-any
                         actives.quotes.map((quote: any, idx: number) => (
-                            <TableRow key={`daily-gainer-${idx}`}>
+                            <TableRow onClick={() => handleClick(quote.symbol)} key={`daily-gainer-${idx}`} className="cursor-pointer">
                                 <TableCell className="symbol">{quote.symbol}</TableCell>
                                 <TableCell className="name">
                                     <span className=" truncate">

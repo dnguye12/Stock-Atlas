@@ -6,12 +6,13 @@ import { ArrowDownNarrowWideIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { currToSymbol, formatMarketCap } from "@/utils/moneyUtils";
 import { truncateText } from "@/utils/textUtils";
+import { useRouter } from "next/navigation";
 
 const DailyShorted = () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [shorts, setShorts] = useState<any>(null)
-
     const [isLoading, setIsLoading] = useState(true)
+    const router = useRouter()
 
     useEffect(() => {
         if (isLoading) {
@@ -37,8 +38,12 @@ const DailyShorted = () => {
             <DailySkeleton Icon={ArrowDownNarrowWideIcon} type="daily_shorted" />
         )
     }
-    
-    return ( 
+
+    const handleClick = (symbol: string) => {
+        router.push(`/stock/${symbol}`)
+    }
+
+    return (
         <div className="highlight-block">
             <div className="highlight-header">
                 <h3 className="inline-flex gap-x-2 items-center">
@@ -60,7 +65,7 @@ const DailyShorted = () => {
                     {
                         // eslint-disable-next-line @typescript-eslint/no-explicit-any
                         shorts.quotes.map((quote: any, idx: number) => (
-                            <TableRow key={`daily-gainer-${idx}`}>
+                            <TableRow onClick={() => handleClick(quote.symbol)} key={`daily-gainer-${idx}`} className="cursor-pointer">
                                 <TableCell className="symbol">{quote.symbol}</TableCell>
                                 <TableCell className="name">
                                     <span className=" truncate">
@@ -95,7 +100,7 @@ const DailyShorted = () => {
                 </TableBody>
             </Table>
         </div>
-     );
+    );
 }
- 
+
 export default DailyShorted;

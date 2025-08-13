@@ -17,7 +17,7 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "../ui/colla
 const items = [
     {
         title: "Home",
-        url: "#",
+        url: "/",
         icon: Home,
         isGroup: false
     },

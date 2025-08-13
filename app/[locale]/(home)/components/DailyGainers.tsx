@@ -6,12 +6,13 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { ChevronUpIcon, CrownIcon } from "lucide-react";
 import { truncateText } from "@/utils/textUtils";
 import DailySkeleton from "./DailySkeleton";
+import { useRouter } from "next/navigation";
 
 const DailyGainers = () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [gainers, setGainers] = useState<any>(null)
-
     const [isLoading, setIsLoading] = useState(true)
+    const router = useRouter()
 
     useEffect(() => {
         if (isLoading) {
@@ -36,6 +37,10 @@ const DailyGainers = () => {
         return (<DailySkeleton Icon={CrownIcon} type="daily_gainers" />)
     }
 
+    const handleClick = (symbol: string) => {
+        router.push(`/stock/${symbol}`)
+    }
+
     return (
         <div className="highlight-block">
             <div className="highlight-header">
@@ -58,7 +63,7 @@ const DailyGainers = () => {
                     {
                         // eslint-disable-next-line @typescript-eslint/no-explicit-any
                         gainers.quotes.map((quote: any, idx: number) => (
-                            <TableRow key={`daily-gainer-${idx}`}>
+                            <TableRow onClick={() => handleClick(quote.symbol)} key={`daily-gainer-${idx}`} className="cursor-pointer">
                                 <TableCell className="symbol">{quote.symbol}</TableCell>
                                 <TableCell className="name">
                                     <span className=" truncate">
@@ -71,7 +76,7 @@ const DailyGainers = () => {
                                     <p className="inline-flex items-center text-up change">
                                         <ChevronUpIcon className=" !stroke-2" />
                                         {quote.regularMarketChangePercent.toFixed(2)}%
-                                        </p>
+                                    </p>
                                 </TableCell>
                             </TableRow>
                         ))

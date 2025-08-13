@@ -11,6 +11,7 @@ import { hasLocale } from "next-intl";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import { TRPCReactProvider } from "@/trpc/client";
+import Footer from "./(home)/components/Footer";
 
 const interSans = Inter({
   variable: "--font-inter-sans",
@@ -55,7 +56,9 @@ export default async function RootLayout({
                 <main className="w-full">
                   <Navbar />
                   {children}
+                  <Footer />
                 </main>
+                
               </ThemeProvider>
             </SidebarProvider>
           </body>
