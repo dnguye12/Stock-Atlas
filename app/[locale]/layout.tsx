@@ -7,7 +7,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/home-page/Navbar";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/home-page/AppSidebar";
-import { hasLocale } from "next-intl";
+import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import { TRPCReactProvider } from "@/trpc/client";
@@ -41,28 +41,30 @@ export default async function RootLayout({
   return (
     <ClerkProvider>
       <TRPCReactProvider>
-        <html lang={locale} suppressHydrationWarning>
-          <body
-            className={`${interSans.className} antialiased relative`}
-          >
-            <script src="https://js.puter.com/v2/"></script>
-            <SidebarProvider>
-              <ThemeProvider
-                attribute="class"
-                defaultTheme="system"
-                enableSystem
-              >
-                <AppSidebar />
-                <main className="w-full">
-                  <Navbar />
-                  {children}
-                  <Footer />
-                </main>
-                
-              </ThemeProvider>
-            </SidebarProvider>
-          </body>
-        </html>
+        <NextIntlClientProvider>
+          <html lang={locale} suppressHydrationWarning>
+            <body
+              className={`${interSans.className} antialiased relative`}
+            >
+              <script src="https://js.puter.com/v2/"></script>
+              <SidebarProvider>
+                <ThemeProvider
+                  attribute="class"
+                  defaultTheme="system"
+                  enableSystem
+                >
+                  <AppSidebar />
+                  <main className="w-full">
+                    <Navbar />
+                    {children}
+                    <Footer />
+                  </main>
+
+                </ThemeProvider>
+              </SidebarProvider>
+            </body>
+          </html>
+        </NextIntlClientProvider>
       </TRPCReactProvider>
     </ClerkProvider>
   );

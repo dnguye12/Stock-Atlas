@@ -11,6 +11,18 @@
             "feature-3-desc": "Intelligent price predictions and trend modeling powered by machine learning.",
             "feature-4-title": "News & Research",
             "feature-4-desc": "News aggregation, expert analyses, and analyst reports in one place."
+        },
+        "Tables": {
+            "top": "Top",
+            "most": "Most",
+            "today": "Today",
+            "losers": "Losers",
+            "gainers": "Gainers",
+            "active": "Active",
+            "shorted": "Shorted",
+            "symbol": "Symbol",
+            "name": "Name",
+            "market cap": "Market Cap"
         }
     }
 }

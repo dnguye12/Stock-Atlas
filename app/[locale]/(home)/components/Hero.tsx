@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { BrainCircuitIcon, ChartAreaIcon, ChartPieIcon, ExternalLinkIcon, GlobeIcon, HomeIcon, LucideProps, NewspaperIcon } from "lucide-react";
+import { BrainCircuitIcon, ChartAreaIcon, ChartPieIcon, ExternalLinkIcon, LucideProps, NewspaperIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { ForwardRefExoticComponent, RefAttributes } from "react";
 
@@ -43,7 +43,7 @@ const Hero = () => {
                             <Button className="cursor-pointer dark:bg-sidebar" variant={"outline"} size={"lg"}>Learn more <ExternalLinkIcon /></Button>
                         </div>
                         <div className="container mx-auto px-10">
-                            <div className="mt-16 grid gap-4 overflow-hidden md:grid-cols-2 lg:grid-cols-4">
+                            <div className="mt-16 hidden md:grid gap-4 overflow-hidden md:grid-cols-2 lg:grid-cols-4">
                                 <HeroFeature
                                     icon={ChartAreaIcon}
                                     title={t("feature-1-title")}

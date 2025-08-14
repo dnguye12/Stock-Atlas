@@ -7,12 +7,14 @@ import { ChartLineIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-react";
 import { truncateText } from "@/utils/textUtils";
 import DailySkeleton from "./DailySkeleton";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 const DailyActive = () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [actives, setActives] = useState<any>(null)
     const [isLoading, setIsLoading] = useState(true)
     const router = useRouter()
+    const t = useTranslations("Home.Tables")
 
     useEffect(() => {
         if (isLoading) {
@@ -48,17 +50,17 @@ const DailyActive = () => {
             <div className="highlight-header">
                 <h3 className="inline-flex gap-x-2 items-center">
                     <ChartLineIcon className=" !stroke-2" />
-                    <span>Most <span className=" font-bol">Active</span> Today</span>
+                    <span>{t("most")} <span className=" font-bol">{t("active")}</span> {t("today")}</span>
                 </h3>
             </div>
 
             <Table>
                 <TableHeader>
                     <TableRow>
-                        <TableHead>Symbol</TableHead>
-                        <TableHead>Name</TableHead>
-                        <TableHead>Market Cap</TableHead>
-                        <TableHead>Today</TableHead>
+                        <TableHead>{t("symbol")}</TableHead>
+                        <TableHead className="hidden md:table-cell">{t("name")}</TableHead>
+                        <TableHead>{t("market cap")}</TableHead>
+                        <TableHead>{t("today")}</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -66,7 +68,10 @@ const DailyActive = () => {
                         // eslint-disable-next-line @typescript-eslint/no-explicit-any
                         actives.quotes.map((quote: any, idx: number) => (
                             <TableRow onClick={() => handleClick(quote.symbol)} key={`daily-gainer-${idx}`} className="cursor-pointer">
-                                <TableCell className="symbol">{quote.symbol}</TableCell>
+                                <TableCell className="symbol">
+                                    <p>{quote.symbol}</p>
+                                    <p className="block md:hidden text-muted-foreground font-normal truncate">{quote.displayName ? truncateText(quote.displayName, 10) : truncateText(quote.shortName, 10)}</p>
+                                </TableCell>
                                 <TableCell className="name">
                                     <span className=" truncate">
                                         {quote.displayName ? truncateText(quote.displayName) : truncateText(quote.shortName)}

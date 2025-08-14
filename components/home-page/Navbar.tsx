@@ -19,7 +19,7 @@ const Navbar = () => {
 
     return (
         <div className="relative bg-sidebar h-16 border-b shadow">
-            <div className="container mx-auto flex justify-between items-center h-full px-10">
+            <div className="container mx-auto flex justify-between items-center h-full px-4 md:px-10">
                 <div className="flex items-center gap-x-4">
                     <SidebarTrigger />
                     <Link href="#">

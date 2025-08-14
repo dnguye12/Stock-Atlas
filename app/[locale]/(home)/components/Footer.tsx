@@ -7,7 +7,7 @@ const Footer = () => {
     return (
         <footer className="w-full bg-sidebar">
             <Separator />
-            <div className="container mx-auto px-10 py-8">
+            <div className="container mx-auto px-4 md:px-10 py-4 md:py-8">
                 <div className="flex w-full flex-col justify-between gap-10 lg:flex-row lg:items-start lg:text-left">
                     <div className="flex w-full flex-col justify-between gap-6 lg:items-start">
                         <div className="flex items-center gap-2 lg:justify-start">
